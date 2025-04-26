@@ -10,6 +10,7 @@ import {
 import { Table as StyledTable, TableWrapper } from './Table.styled';
 import { Container } from 'styled/elements/Container';
 import { useVirtual } from '@tanstack/react-virtual';
+import { useTheme } from 'styled-components';
 
 export type TableColumn<T> = ColumnDef<T> & {
 	textAlign?: CSSProperties['textAlign'];
@@ -20,12 +21,14 @@ interface TableProps<T> {
 	columns: TableColumn<T>[];
 }
 
+
 const Table = <T extends unknown>({ data, columns }: TableProps<T>) => {
 	const table = useReactTable({
 		data,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 	});
+	const { colors } = useTheme();
 	const tableContainerRef = useRef<HTMLDivElement>(null);
 
 	const { rows } = table.getRowModel();
@@ -65,7 +68,7 @@ const Table = <T extends unknown>({ data, columns }: TableProps<T>) => {
               top: 0,
               zIndex: isSticky ? 15 : 10,
 							// zIndex: 100,
-              background: 'white',
+              background: colors.bgColor,
               left: isSticky ? `${leftOffset}px` : undefined,
   
             }}

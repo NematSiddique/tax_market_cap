@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 const fetchCoinChartData = (coin: string, days: number) =>
 	axios.get<{ prices: [number, number][] }>(
-		`${process.env.NEXT_PUBLIC_API_URL}/coins/${coin}/market_chart`,
+		`${process.env.API_URL}/coins/${coin}/market_chart`,
 		{
 			params: {
 				vs_currency: 'usd',

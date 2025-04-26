@@ -17,7 +17,7 @@ interface CoinsGlobal {
 }
 
 const fetchGlobalStatistics = () =>
-	axios.get<{ data: CoinsGlobal }>(`${process.env.NEXT_PUBLIC_API_URL}/global`);
+	axios.get<{ data: CoinsGlobal }>(`${process.env.API_URL}/global`);
 
 const useGlobalStatistics = () => {
 	return useQuery({

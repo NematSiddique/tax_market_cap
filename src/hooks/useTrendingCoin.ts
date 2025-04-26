@@ -16,7 +16,7 @@ interface TrendingCoin {
 
 const fetchTrendingCoins = () =>
 	axios.get<{ coins: TrendingCoin[] }>(
-		`${process.env.NEXT_PUBLIC_API_URL}/search/trending`
+		`${process.env.API_URL}/search/trending`
 	);
 
 const useTrendingCoins = () => {

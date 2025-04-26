@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import axios from 'axios';
 import SectionHeader from 'components/SectionHeader/SectionHeader';
-import Pagination from 'components/Pagination/Pagination';
+// import Pagination from 'components/Pagination/Pagination';
 import HomeTable from 'components/pages/home/HomeTable/HomeTable';
 import SEO from 'components/SEO/SEO';
 
@@ -12,14 +12,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 				params: {
 					vs_currency: 'usd',
 					order: 'market_cap_desc',
-					ids: 'bitcoin,ethereum,tether,ripple,binancecoin', // Hardcoded list of coin IDs
-					per_page: 5,
+					ids: 'bitcoin,ethereum,tether,ripple,binancecoin,solana',
+					per_page: 6,
 					sparkline: true,
 					page: query.page ?? 1,
 					price_change_percentage: '1h,24h,7d',
 				},
 			})
 		).data;
+		console.log('coins', coins);
 		return {
 			props: {
 				coins,
@@ -33,21 +34,22 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 };
 
 export interface CoinData {
-	market_cap_rank: number;
-	id: string;
-	name: string;
-	circulating_supply: number;
-	symbol: string;
-	image: string;
-	market_cap: number;
-	price_change_percentage_1h_in_currency: number;
-	price_change_percentage_24h_in_currency: number;
-	price_change_percentage_7d_in_currency: number;
-	current_price: number;
-	total_volume: number;
-	sparkline_in_7d: {
-		price: number[];
-	};
+  market_cap_rank: number;
+  id: string;
+  name: string;
+  circulating_supply: number;
+  max_supply: number | null; // <-- ADD THIS
+  symbol: string;
+  image: string;
+  market_cap: number;
+  price_change_percentage_1h_in_currency: number;
+  price_change_percentage_24h_in_currency: number;
+  price_change_percentage_7d_in_currency: number;
+  current_price: number;
+  total_volume: number;
+  sparkline_in_7d: {
+    price: number[];
+  };
 }
 
 interface HomeProps {
@@ -59,8 +61,8 @@ const Home = ({ coins }: HomeProps) => {
 		<>
 			<SEO />
 			<SectionHeader
-				title="Today's Cryptocurrency Prices by Market"
-				description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio officia laboriosam ad, rerum iste eaque facilis tempora nam maiores nihil?"
+				title="Live Crypto Market Overview"
+				description=" "
 			/>
 			{coins ? (
 				<HomeTable initialCoins={coins} />
@@ -68,7 +70,7 @@ const Home = ({ coins }: HomeProps) => {
 				<div>Could not fetch coins</div>
 			)}
 
-			<Pagination totalItems={5_000} itemsPerPage={100} uri="/" />
+			
 		</>
 	);
 };

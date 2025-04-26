@@ -1,60 +1,50 @@
-import { faBars, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faMagnifyingGlass, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { toggleOpen } from 'app/slices/menuSlice';
 import { useAppDispatch } from 'hooks/redux';
-import Submenu, { SubmenuProps } from 'components/layout/Navbar/Submenu';
-import menuData from 'data/menuItems.json';
+import { useThemeContext } from 'src/theme/ThemeProvider';
+import { useTheme } from 'styled-components';
 import {
 	NavbarWrapper,
 	NavbarContent,
 	LogoWrapper,
-	MenuList,
-	MenuItem,
-	MenuLink,
-	Search,
-	HamburgerButton,
+	ThemeButton,
 } from 'components/layout/Navbar/Navbar.styled';
-
-export type MenuData = Record<string, SubmenuProps>;
 
 const Navbar = () => {
 	const dispatchMenu = useAppDispatch();
-	const data = Object.entries(menuData as unknown as MenuData);
+	const [, dispatch] = useThemeContext();
+	const { name } = useTheme();
+
+	const logoSrc = name === 'light' ? '/BlacklogoTMC.svg' : '/WhitelogoTMC.svg';
 
 	const handleToggleMenu = (): void => {
 		dispatchMenu(toggleOpen());
+	};
+
+	const handleToggleTheme = () => {
+		dispatch('toggle');
 	};
 
 	return (
 		<NavbarWrapper>
 			<NavbarContent>
 				<LogoWrapper>
-					<Link href="/">
+					<Link href="/" passHref>
 						<a>
-							<Image src="/logo.svg" alt="" width={168} height={60} />
+							<Image src={logoSrc} alt="Logo" width={250} height={90} />
 						</a>
 					</Link>
 				</LogoWrapper>
-				<MenuList>
-					{data.map((data, index) => (
-						<MenuItem key={index}>
-							<MenuLink>{data[0]}</MenuLink>
-							<Submenu
-								multiSubmenu={data[1].multiSubmenu}
-								list={data[1].list}
-							/>
-						</MenuItem>
-					))}
-				</MenuList>
-				<Search>
-					<FontAwesomeIcon size="xl" icon={faMagnifyingGlass} />
-				</Search>
-				<HamburgerButton onClick={handleToggleMenu}>
-					<FontAwesomeIcon size="xl" icon={faBars} />
-				</HamburgerButton>
+				<ThemeButton onClick={handleToggleTheme}>
+					<FontAwesomeIcon
+						fontSize={18}
+						icon={name === 'light' ? faMoon : faSun}
+					/>
+				</ThemeButton>
 			</NavbarContent>
 		</NavbarWrapper>
 	);

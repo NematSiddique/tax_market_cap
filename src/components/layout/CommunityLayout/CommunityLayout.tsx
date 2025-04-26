@@ -1,6 +1,6 @@
 import React, { ComponentType, ReactElement } from 'react';
-import SidebarLeft from './SidebarLeft/SidebarLeft';
-import SidebarRight from './SidebarRight/SidebarRight';
+// import SidebarLeft from './SidebarLeft/SidebarLeft';
+// import SidebarRight from './SidebarRight/SidebarRight';
 import {
 	CommunityLayoutWrapper,
 	CommunityLayoutContainer,
@@ -13,9 +13,9 @@ const CommunityLayout: ComponentType<{ children: ReactElement }> = ({
 	return (
 		<CommunityLayoutWrapper>
 			<CommunityLayoutContainer>
-				<SidebarLeft />
+				{/* <SidebarLeft />
 				<MainWrapper>{children}</MainWrapper>
-				<SidebarRight />
+				<SidebarRight /> */}
 			</CommunityLayoutContainer>
 		</CommunityLayoutWrapper>
 	);

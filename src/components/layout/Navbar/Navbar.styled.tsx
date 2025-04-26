@@ -3,52 +3,52 @@ import { Container } from 'styled/elements/Container';
 
 // ---------------------------------SUBMENU ---------------------------------
 
-interface SubmenuProps {
-	multiSubmenu?: boolean;
-	columns: number;
-}
+// interface SubmenuProps {
+// 	multiSubmenu?: boolean;
+// 	columns: number;
+// }
 
-export const SubmenuWrapper = styled.div<SubmenuProps>`
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	transform: translate(-50%, 0%);
-	background: ${({ theme: { colors } }) => colors.bgColor};
-	z-index: 1000;
-	padding: 24px 19px;
-	white-space: nowrap;
-	display: grid;
-	visibility: hidden;
-	grid-template-columns: ${({ columns }) => `repeat(${columns}, 1fr)`};
-	border-radius: 8px;
-	box-shadow: rgba(128, 138, 157, 0.12) 0px 1px 2px,
-		rgba(128, 138, 157, 0.24) 0px 8px 32px;
-	opacity: 0;
-	transition: opacity 0.25s ease 0.1s;
+// export const SubmenuWrapper = styled.div<SubmenuProps>`
+// 	position: absolute;
+// 	top: 100%;
+// 	left: 50%;
+// 	transform: translate(-50%, 0%);
+// 	background: ${({ theme: { colors } }) => colors.bgColor};
+// 	z-index: 1000;
+// 	padding: 24px 19px;
+// 	white-space: nowrap;
+// 	display: grid;
+// 	visibility: hidden;
+// 	grid-template-columns: ${({ columns }) => `repeat(${columns}, 1fr)`};
+// 	border-radius: 8px;
+// 	box-shadow: rgba(128, 138, 157, 0.12) 0px 1px 2px,
+// 		rgba(128, 138, 157, 0.24) 0px 8px 32px;
+// 	opacity: 0;
+// 	transition: opacity 0.25s ease 0.1s;
 
-	&::before {
-		content: '';
-		display: block;
-		width: 0px;
-		z-index: 1000;
-		height: 0px;
-		border-width: 10px;
-		border-style: solid;
-		border-image: initial;
-		border-top-color: transparent;
-		border-right-color: transparent;
-		border-left-color: transparent;
-		border-bottom-color: ${({ theme: { colors } }) => colors.bgColor};
-		position: absolute;
-		top: -20px;
-		left: calc(50% - 10px);
-	}
-`;
+// 	&::before {
+// 		content: '';
+// 		display: block;
+// 		width: 0px;
+// 		z-index: 1000;
+// 		height: 0px;
+// 		border-width: 10px;
+// 		border-style: solid;
+// 		border-image: initial;
+// 		border-top-color: transparent;
+// 		border-right-color: transparent;
+// 		border-left-color: transparent;
+// 		border-bottom-color: ${({ theme: { colors } }) => colors.bgColor};
+// 		position: absolute;
+// 		top: -20px;
+// 		left: calc(50% - 10px);
+// 	}
+// `;
 
-export const SubmenuColumn = styled.div`
-	margin: 0 10px;
-	align-self: flex-start;
-`;
+// export const SubmenuColumn = styled.div`
+// 	margin: 0 10px;
+// 	align-self: flex-start;
+// `;
 
 export const ColumnCategory = styled.p`
 	margin: 0 0 10px 10px;
@@ -84,6 +84,8 @@ export const NavbarWrapper = styled.nav`
 export const NavbarContent = styled(Container)`
 	display: flex;
 	align-items: center;
+	justify-content: space-between; // ⬅️ add this line
+	width: 100%;
 `;
 
 export const MenuList = styled.ul`
@@ -117,20 +119,13 @@ export const MenuItem = styled.li`
 	position: relative;
 
 	&:hover {
-		${SubmenuWrapper} {
-			visibility: visible;
-			opacity: 1;
-		}
+		
 		${MenuLink} {
 			color: ${({ theme: { colors } }) => colors.themeColor};
 		}
 	}
 
-	&:first-child {
-		${SubmenuColumn}:first-child {
-			grid-row: 1 / 3;
-		}
-	}
+	
 `;
 
 export const Search = styled.button`
@@ -143,4 +138,9 @@ export const HamburgerButton = styled.button`
 	@media screen and (min-width: 1200px) {
 		display: none;
 	}
+`;
+
+export const ThemeButton = styled.button`
+	margin-right: 16px;
+	color: ${({ theme: { colors } }) => colors.textColor};
 `;

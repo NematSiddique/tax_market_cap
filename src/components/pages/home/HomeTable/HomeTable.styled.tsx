@@ -4,6 +4,13 @@ export const LinkWrapper = styled.div`
 	display: flex;
 `;
 
+export const HeaderCell = styled.div`
+  color: ${({ theme: { colors } }) => colors.colorLightNeutral5};
+  // position: sticky;
+  top: 0;
+  z-index: 10; 
+`;
+
 export const NameWrapper = styled.a`
 	display: flex;
 	align-items: center;
