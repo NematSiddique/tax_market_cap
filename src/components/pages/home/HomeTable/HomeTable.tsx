@@ -45,8 +45,14 @@ const HomeTable = ({ initialCoins }: HomeTableProps) => {
   };
 
   useEffect(() => {
-    const ws = new WebSocket('wss://stream.binance.com:9443/stream?streams=btcusdt@trade/ethusdt@trade/bnbusdt@trade/xrpusdt@trade/adausdt@trade');
-
+    const binanceWsUrl=process.env.NEXT_PUBLIC_BINANCE_WS;
+    if (!binanceWsUrl) {
+      console.error('Binance WebSocket URL is not defined in the environment variables.');
+      return;
+    }
+    const ws = new WebSocket(
+      `${binanceWsUrl}/stream?streams=btcusdt@trade/ethusdt@trade/bnbusdt@trade/xrpusdt@trade/adausdt@trade`
+    );
     ws.onmessage = (event) => {
       const message = JSON.parse(event.data);
       if (!message.data) return;
