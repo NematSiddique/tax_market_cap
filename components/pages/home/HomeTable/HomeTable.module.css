@@ -1,0 +1,9 @@
+.tableHeader {
+  text-align: left; /* Align text to the left */
+  padding: 10px; /* Add padding for better spacing */
+}
+
+.tableHeaderNumber {
+  text-align: left; /* Align the # column to the left */
+  width: 50px; /* Set a fixed width for the # column */
+}
