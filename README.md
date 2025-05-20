@@ -132,5 +132,4 @@ tax-market-cap/
 
 ---
 
-> Built with passion for real-time crypto tracking.
-
+**Happy coding!**
